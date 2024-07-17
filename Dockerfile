@@ -15,9 +15,9 @@ ENV PATH="$SST_DIR/bin:$PATH"
 
 ENV SST_TELEMETRY_DISABLED="1"
 
-RUN mkdir -p /app
+RUN mkdir -p /dummy
 
-RUN cd /app & yes | sst init \ 
+RUN cd /dummy & yes | sst init \ 
     sst install --verbose
 
 CMD ["/bin/bash"]
