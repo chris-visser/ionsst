@@ -20,4 +20,6 @@ RUN mkdir -p /dummy
 RUN cd /dummy & yes | sst init \ 
     sst install --verbose
 
+RUN /root/.config/sst/bin/pulumi plugin install resource aws v6.45.0
+
 CMD ["/bin/bash"]
