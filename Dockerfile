@@ -6,8 +6,8 @@ RUN touch /root/.bashrc
 
 RUN curl -fsSL https://ion.sst.dev/install | VERSION=0.1.81 bash
 
-# ENV SST_DIR="/root/.sst"
-# ENV PATH="$SST_DIR/bin:$PATH"
+ENV SST_DIR="/root/.sst"
+ENV PATH="$SST_DIR/bin:$PATH"
 ENV SST_TELEMETRY_DISABLED="1"
 
 WORKDIR /app
