@@ -1,10 +1,10 @@
 VERSION=$1
 
-docker build -t cloudspider/ionsst:$VERSION . --no-cache --progress=plain
+docker build --no-cache --progress=plain -t chrisvisserio/ionsst:$VERSION .
 
-docker login  -u cloudspider
+# docker login  -u cloudspider
 
-docker push cloudspider/ionsst:$VERSION
+# docker push cloudspider/ionsst:$VERSION
 
 # export DOCKER_DEFAULT_PLATFORM=linux/amd64
 

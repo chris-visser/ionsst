@@ -1,25 +1,26 @@
-FROM --platform=linux/amd64 imbios/bun-node:1.1.20-20.12.2-alpine
+FROM --platform=linux/amd64 frolvlad/alpine-glibc:glibc-2.34
 
-RUN apk update && \
-    apk add \
-    tar \
-    gzip \
-    curl \
-    bash \
-    yarn>4.3.1
+RUN apk add --no-cache curl bash tar gzip nodejs>20.12.2 yarn>4.4.0
 
-RUN curl -fsSL https://ion.sst.dev/install | VERSION=0.0.532 bash
+RUN touch /root/.bashrc
 
-ENV SST_DIR="/root/.sst"
-ENV PATH="$SST_DIR/bin:$PATH"
+RUN curl -fsSL https://ion.sst.dev/install | VERSION=0.1.81 bash
 
+# ENV SST_DIR="/root/.sst"
+# ENV PATH="$SST_DIR/bin:$PATH"
 ENV SST_TELEMETRY_DISABLED="1"
 
-RUN mkdir -p /dummy
+WORKDIR /app
 
-RUN cd /dummy & yes | sst init \ 
-    sst install --verbose
+COPY ./sst.config.ts /sst.config.ts
 
-RUN /root/.config/sst/bin/pulumi plugin install resource aws v6.45.0
+RUN sst init --verbose | exit 0
+
+RUN sst deploy --stage development --verbose | exit 0
+
+# # RUN /root/.config/sst/bin/pulumi plugin install resource aws v6.45.0
+
+# # RUN ls -la ~/.pulumi/plugins
+# # RUN ls -la ~/.config/sst/bin
 
 CMD ["/bin/bash"]
