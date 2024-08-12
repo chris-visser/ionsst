@@ -1,7 +1,7 @@
 FROM --platform=linux/amd64 frolvlad/alpine-glibc:glibc-2.34
 
-ARG AWS_ACCESS_KEY_ID
-ARG AWS_SECRET_ACCESS_KEY
+ARG AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+ARG AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
 RUN apk add --no-cache curl bash tar gzip nodejs>20.12.2 yarn>4.4.0
 
@@ -17,12 +17,11 @@ WORKDIR /app
 
 COPY ./sst.config.ts ./sst.config.ts
 
-ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-
-RUN sst init --verbose | exit 0
-
-RUN sst deploy --stage development --verbose | exit 0
+RUN --mount=type=secret,id=aws_access_key_id \
+    --mount=type=secret,id=aws_secret_access_key \
+    export AWS_ACCESS_KEY_ID=$(cat /run/secrets/aws_access_key_id) \
+    && export AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/aws_secret_access_key) \
+    && sst deploy --stage development --verbose | exit 0
 
 # # RUN /root/.config/sst/bin/pulumi plugin install resource aws v6.45.0
 
