@@ -12,7 +12,7 @@ ENV SST_TELEMETRY_DISABLED="1"
 
 WORKDIR /app
 
-COPY ./sst.config.ts /sst.config.ts
+COPY ./sst.config.ts ./sst.config.ts
 
 RUN sst init --verbose | exit 0
 
