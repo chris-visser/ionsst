@@ -27,7 +27,7 @@ RUN --mount=type=secret,id=aws_access_key_id \
     && export AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/aws_secret_access_key) \
     && sst deploy --stage development --verbose | exit 0
 
-RUN sst deploy --stage development --verbose
+# RUN sst deploy --stage development --verbose
 
 # # RUN /root/.config/sst/bin/pulumi plugin install resource aws v6.45.0
 
