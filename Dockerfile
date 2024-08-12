@@ -1,7 +1,7 @@
 FROM --platform=linux/amd64 frolvlad/alpine-glibc:glibc-2.34
 
-ARG AWS_ACCESS_KEY_ID
-ARG AWS_SECRET_ACCESS_KEY
+ARG AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+ARG AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
 RUN apk add --no-cache curl bash tar gzip nodejs>20.12.2 yarn>4.4.0
 
