@@ -1,24 +1,23 @@
 /// <reference path="./.sst/platform/config.d.ts" />
 
 export default $config({
-  app() {
+  app(input) {
     return {
-      home: 'aws',
-      name: 'bc-fe-sst-poc',
-      removal: 'retain',
-    }
+      name: "ionsst",
+      removal: input?.stage === "production" ? "retain" : "remove",
+      home: "aws",
+    };
   },
   async run() {
-    const TestFunction = new sst.aws.Function('TestFunction', {
-      handler: 'index.handler',
-      role: 'arn:aws:iam::174382187256:role/bc-euc1-dev-aws-lambda-python-template',
+    const TestFunction = new sst.aws.Function('ssr', {
+      handler: 'index.main',
       url: true,
     })
 
-    new sst.aws.Router('PocRouter', {
+    new sst.aws.Router('router', {
       routes: {
-        '/': TestFunction.url,
+        '/*': TestFunction.url,
       },
     })
   },
-})
+});

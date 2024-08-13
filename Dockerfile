@@ -29,9 +29,4 @@ RUN --mount=type=secret,id=aws_access_key_id \
 
 # RUN sst deploy --stage development --verbose
 
-# # RUN /root/.config/sst/bin/pulumi plugin install resource aws v6.45.0
-
-# # RUN ls -la ~/.pulumi/plugins
-# # RUN ls -la ~/.config/sst/bin
-
 CMD ["/bin/bash"]
