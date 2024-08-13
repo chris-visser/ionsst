@@ -25,7 +25,7 @@ RUN --mount=type=secret,id=aws_access_key_id \
     --mount=type=secret,id=aws_secret_access_key \
     export AWS_ACCESS_KEY_ID=$(cat /run/secrets/aws_access_key_id) \
     && export AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/aws_secret_access_key) \
-    && sst deploy --stage development --verbose | exit 0
+    && sst deploy --stage development --verbose
 
 # RUN sst deploy --stage development --verbose
 
