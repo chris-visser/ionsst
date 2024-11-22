@@ -1,1 +1,1 @@
-docker run --rm -v "$(pwd)/script.sh:/script.sh" chrisvisserio/ionsst:0.2.9 bash /script.sh
+docker run --rm -v "$(pwd)/script.sh:/script.sh" chrisvisserio/ionsst:0.3.7 bash /script.sh --debug
