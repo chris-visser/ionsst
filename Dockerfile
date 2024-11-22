@@ -7,7 +7,7 @@ RUN apk add --no-cache curl bash tar gzip nodejs>20.12.2 yarn>4.4.0
 
 RUN touch /root/.bashrc
 
-RUN curl -fsSL https://sst.dev/install | VERSION=3.3.27 bash
+RUN curl -fsSL https://sst.dev/install | VERSION=3.2.76 bash
 
 ENV SST_DIR="/root/.sst"
 ENV PATH="$SST_DIR/bin:$PATH"
